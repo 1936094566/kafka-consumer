@@ -23,6 +23,7 @@ public class KafkaCoustomerListener {
     @KafkaListener(topics = "${certificate.info.topic}", id = "${kafka.consumer.group.id}",concurrency = "1", containerFactory = "batchFactory")
     public void listen(List<ConsumerRecord<?, ?>> records, Acknowledgment ack) {
         try {
+            log.info("开始处理数据");
             List<String> messages = new ArrayList<>();
             for (ConsumerRecord<?, ?> record : records) {
                 Optional<?> kafkaMessage = Optional.ofNullable(record.value());
